@@ -8,6 +8,3 @@ export const env = (envName, defaultValue) => {
 
   throw new Error(`Env var with name ${envName} is not found`);
 };
-
-
-
