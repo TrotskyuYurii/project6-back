@@ -23,21 +23,6 @@ export const ENV_VARS = {
     FRONTEND_HOST: 'FRONTEND_HOST',
   };
 
-  export const SORT_ORDER = {
-    ASC: 'asc',
-    DESC: 'desc',
-  };
-
-  export const keysOfStudent = [
-    '_id',
-    'name',
-    'phoneNumber',
-    'email',
-    'isFavourite',
-    'contactType',
-    'createdAt',
-    'updatedAt',
-  ];
 
   export const TEMPLATE_DIR = path.join(process.cwd(), 'src', 'templates');
   export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'temp');
