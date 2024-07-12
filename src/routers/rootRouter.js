@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import contactsRouter from './contacts.js';
+import waterRouter from './water.js';
 import authRouter from './auth.js';
 
 const rootRouter = Router();
 
-rootRouter.use('/contacts',contactsRouter);
+rootRouter.use('/water',waterRouter);
 rootRouter.use('/auth',authRouter);
 
 export default rootRouter;
