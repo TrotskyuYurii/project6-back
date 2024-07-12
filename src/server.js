@@ -12,58 +12,43 @@ import { errorHandlerMiddleware } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
 
+export const setupServer = () => {
+  const app = express();
 
-//Запуск сервера
-export const setupServer=()=> {
+  const PORT = env(ENV_VARS.PORT, 3000);
 
-    //Ініціалізація сервера
-    const app = express();
+  app.use(
+    express.json({
+      limit: '1mb',
+      type: ['application/json', 'application/vnd.api+json'],
+    }),
+  );
 
-    //Додавання middleware для відображення API Reference
-    app.use('/api-docs', swagger());
-    
-    // app.use(pino());
-    // app.use(
-    //     pino({
-    //       transport: {
-    //         target: 'pino-pretty',
-    //       },
-    //     }),
-    //   );
+  app.use('/api-docs', swagger());
+
+  app.use(cors());
 
 
-    //Додавання middleware для обробки помилок
-    app.use(cors());
+  app.use('/uploads', express.static(UPLOAD_DIR));
+
+  app.use(cookiesParser());
+
+  app.use(rootRouter);
+
+  app.use(errorHandlerMiddleware);
+  app.use(notFoundHandler);
 
 
-    //Додавання middleware для парсингу JSON
-    app.use(
-      express.json({
-        limit: '1mb',
-        type: ['application/json', 'application/vnd.api+json'],
-      }),
-    );
+  // app.use(pino());
+  // app.use(
+  //     pino({
+  //       transport: {
+  //         target: 'pino-pretty',
+  //       },
+  //     }),
+  //   );
 
-    //Додавання middleware для статичних файлів
-    app.use('/uploads', express.static(UPLOAD_DIR));
-
-    //Додавання middleware для парсингу cookies
-    app.use(cookiesParser());
-
-    //Підключення маршрутів
-    app.use(rootRouter);
-
-    //підключення обробників помилок
-    app.use(errorHandlerMiddleware);
-    app.use(notFoundHandler);
-
-
-    //Запуск сервера
-    const PORT = env(ENV_VARS.PORT, 3000);
-
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-    
-}
-
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+};

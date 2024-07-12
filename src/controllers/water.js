@@ -1,24 +1,49 @@
-import createHttpError from 'http-errors';
+import { addWater, deleteWater, editWater, getAllWater } from '../services/water.js';
 
-import {
-  addWater,
-  editWater,
-  deleteWater,
-  dayWater,
-  monthWater,
-  todayWater,
-} from '../services/water.js';
+
+// temp Controller for check db
+export const getAllWaterController = async (req, res) => {
+  try {
+    const water = await getAllWater();
+    res.json(water);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 export const addWaterController = async (req, res) => {
-
-}
+  try {
+    const water = await addWater(req.body);
+    res.status(201).json(water);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
 export const editWaterByIdController = async (req, res) => {
-
+  try {
+    const { id } = req.params;
+    const updatedWater = await editWater(id, req.body);
+    if (!updatedWater) {
+      return res.status(404).json({ message: 'Water record not found' });
+    }
+    res.status(200).json(updatedWater);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
 
 export const deleteWaterController = async (req, res) => {
-
+  try {
+    const { id } = req.params;
+    const deletedWater = await deleteWater(id);
+    if (!deletedWater) {
+      return res.status(404).json({ message: 'Water record not found' });
+    }
+    res.status(204).send();
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
 
 export const dayWaterController = async (req, res) => {
