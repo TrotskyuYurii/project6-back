@@ -18,11 +18,11 @@ export const deleteWater = async (waterId) => {
   return WatersCollection.findByIdAndDelete(waterId);
 };
 
-export const dayWater = async (payload) => {
-
+export const getDayWater = async (date, payload) => {
+ return "abracadabra";
 };
 
-export const monthWater = async (payload) => {
+export const getMonthWater = async (payload) => {
 
 };
 

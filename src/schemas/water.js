@@ -26,3 +26,7 @@ export const editWaterSchema = Joi.object({
   amount: Joi.number().min(50).max(1500).required(),
   time: Joi.string().custom(validateTime, 'custom time validation').required(),
 });
+
+export const dayParamSchema = Joi.object({
+  date: Joi.string().custom(validateDate, 'custom date validation').required(),
+});

@@ -1,4 +1,4 @@
-import { addWater, deleteWater, editWater, getAllWater } from '../services/water.js';
+import { addWater, deleteWater, editWater, getAllWater, getDayWater } from '../services/water.js';
 
 
 // temp Controller for check db
@@ -47,7 +47,13 @@ export const deleteWaterController = async (req, res) => {
 };
 
 export const dayWaterController = async (req, res) => {
-
+try {
+  const { date } = req.params;
+  const water = await getDayWater(date);
+   res.json(water);
+} catch (error) {
+  res.status(500).json({ message: 'Server error' });
+}
 };
 
 export const monthWaterController = async (req, res) => {
@@ -58,3 +64,9 @@ export const todayWaterController = async (req, res) => {
 
 };
 
+
+
+
+function formatDate(date) {
+  return date.toISOString().slice(0, 16);
+}
