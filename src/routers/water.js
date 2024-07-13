@@ -11,9 +11,11 @@ import {
   getAllWaterController,
 } from '../controllers/water.js';
 import { validateBody } from '../middlewares/validateBody.js';
+import { validateParams } from '../middlewares/validateParams.js';
 import {
   addWaterSchema,
   editWaterSchema,
+  dayParamSchema,
 } from '../schemas/water.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
@@ -30,10 +32,10 @@ waterRouter.delete('/remove/:id', ctrlWrapper(deleteWaterController));
 // тимчасовий шлях для перевірки
 waterRouter.get('/getAll', ctrlWrapper(getAllWaterController));
 
-waterRouter.get('/day/:date', ctrlWrapper(dayWaterController));
+waterRouter.get('/day/:date', validateParams(dayParamSchema), ctrlWrapper(dayWaterController));
 
-waterRouter.get('/month/:date', ctrlWrapper(monthWaterController));
+waterRouter.get('/month/:date', validateParams(dayParamSchema), ctrlWrapper(monthWaterController));
 
-waterRouter.get('/today', ctrlWrapper(todayWaterController));
+// waterRouter.get('/today', ctrlWrapper(todayWaterController)); - не потрібен бо потрібно використовувати дату з фронта через різницю поясів між фронтом користувача та бекендом
 
 export default waterRouter;
