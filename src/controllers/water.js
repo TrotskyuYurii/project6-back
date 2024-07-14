@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { addWater, deleteWater, editWater, getDayWater, getMonthWater } from '../services/water.js';
 
 
@@ -58,9 +59,12 @@ export const deleteWaterController = async (req, res) => {
 export const dayWaterController = async (req, res) => {
   try {
     const { date } = req.params;
-    const authWaterId = setAuthWaterId(req);
+    const authData = setAuthWaterId(req);
+    const userId = authData.userId instanceof mongoose.Types.ObjectId 
+      ? authData.userId 
+      : new mongoose.Types.ObjectId(authData.userId);
 
-    const water = await getDayWater(date, authWaterId);
+    const water = await getDayWater(date, userId);
     if (!water || water.length === 0) {
       return res.status(404).json({ message: 'Water records not found for this user' });
     }
@@ -73,9 +77,12 @@ export const dayWaterController = async (req, res) => {
 export const monthWaterController = async (req, res) => {
   try {
     const { date } = req.params;
-    const authWaterId = setAuthWaterId(req);
+    const authData = setAuthWaterId(req);
+    const userId = authData.userId instanceof mongoose.Types.ObjectId 
+      ? authData.userId 
+      : new mongoose.Types.ObjectId(authData.userId);
 
-    const water = await getMonthWater(date, authWaterId);
+    const water = await getMonthWater(date, userId);
     if (!water || water.length === 0) {
       return res.status(404).json({ message: 'Water records not found for this user' });
     }
