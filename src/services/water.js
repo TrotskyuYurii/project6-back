@@ -30,14 +30,14 @@ export const deleteWater = async (waterId) => {
   return water;
 };
 
-export const getDayWater = async (date, payload) => {
-  return WatersCollection.find({ date: date });
-};
+  export const getDayWater = async (date, userId) => {
+    return await WatersCollection.find({ date, userId });
+  };
 
-export const getMonthWater = async (date, payload) => {
+  export const getMonthWater = async (date, userId) => {
 
   const [_, month, year] = date.split('-');
   const dateRegex = new RegExp(`^\\d{2}-${month}-${year}$`);
 
-  return WatersCollection.find({ date: dateRegex });
-};
+    return WatersCollection.find({date: dateRegex, userId: userId});
+  };
