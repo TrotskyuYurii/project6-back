@@ -13,14 +13,14 @@ import { WatersCollection } from '../db/models/waterModel.js';
     return WatersCollection.findByIdAndDelete(waterId);
   };
 
-  export const getDayWater = async (date, payload) => {
-    return WatersCollection.find({ date: date });
+  export const getDayWater = async (date, waterId) => {
+    return await WatersCollection.find({ date, waterId });
   };
 
-  export const getMonthWater = async (date, payload) => {
+  export const getMonthWater = async (date, waterId) => {
 
     const [_, month, year] = date.split('-');
     const dateRegex = new RegExp(`^\\d{2}-${month}-${year}$`);
 
-    return WatersCollection.find({ date: dateRegex });
+    return WatersCollection.find({date: dateRegex, waterId: waterId});
   };
