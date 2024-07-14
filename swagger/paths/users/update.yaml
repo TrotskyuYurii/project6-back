@@ -1,0 +1,73 @@
+tags:
+  - Users
+summary: Update user data
+operationId: updateUser
+description: 'You can provide a payload to update your information'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          _id:
+            description: "User's id"
+            type: string
+            example: 66785ee7009eeec396e0e546
+          name:
+            description: "User's name"
+            type: string
+            example: 'John Doe'
+          email:
+            description: "User's email"
+            type: string
+            example: 'john@example.com'
+          password:
+            description: "User's password"
+            type: string
+          weight:
+            description: "User's weight"
+            type: number
+            example: 73
+          sportTime:
+            description: 'The time of active participation in sports'
+            type: number
+            example: 3
+          waterNorma:
+            description: 'Amount of water consumed by the user per day'
+            type: number
+            example: 2.5
+          gender:
+            description: "User's gender"
+            type: string
+            enum: ['woman', 'man']
+          avatar:
+            description: "Link to user's avatar"
+            type: string
+            example: https://some-avatar-url.png
+responses:
+  '200':
+    description: 'Update user'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully update user data!
+            data:
+              type: object
+              $ref: ..\..\components\schemas\user.yaml
+  '404':
+    $ref: ..\..\components\responses\404.yaml
+  '401':
+    $ref: ..\..\components\responses\401.yaml

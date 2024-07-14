@@ -1,0 +1,32 @@
+tags:
+  - Users
+summary: Confirm OAuth
+operationId: confirmOAuth
+description: 'Confirm authorization with Google OAuth'
+security: []
+responses:
+  '200':
+    description: Confirm OAuth
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully get Google OAuth url!
+            data:
+              type: object
+              required:
+                - accessToken
+              properties:
+                accessToken:
+                  type: string
+                  example: your access token

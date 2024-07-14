@@ -1,0 +1,70 @@
+tags:
+  - Users
+summary: Login user
+operationId: loginUser
+description: 'Login a user with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            description: "User's email"
+            type: string
+            example: 'john@example.com'
+          password:
+            description: "User's password"
+            type: string
+responses:
+  '200':
+    description: Login a user
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully logged in an user!
+            data:
+              type: object
+              required:
+                - accessToken
+              properties:
+                accessToken:
+                  type: string
+                  example: your access token
+  '401':
+    description: Unauthorized error
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - errors
+          properties:
+            status:
+              type: integer
+              example: 401
+            message:
+              type: string
+              example: Wrong email or password!
+            errors:
+              type: array
+              example: []

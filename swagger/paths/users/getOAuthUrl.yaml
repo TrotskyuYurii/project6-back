@@ -1,0 +1,31 @@
+tags:
+  - Users
+summary: Get OAuth URL
+operationId: getOAuthUrl
+description: 'Get OAuth URL that will contain the necessary information for login verification'
+security: []
+responses:
+  '200':
+    description: Get OAuth URL
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully get Google OAuth url!
+            data:
+              type: object
+              required:
+                - url
+              properties:
+                url:
+                  type: string
