@@ -1,6 +1,20 @@
 import { addWater, deleteWater, editWater, getAllUsers, getDayWater, getMonthWater } from '../services/water.js';
 
 
+const setAuthWaterId = (req) => {
+  let authWaterId = {};
+  const { waterId } = req.params;
+  const userId = req.user._id;
+  if (waterId) {
+    authWaterId = { _id: waterId };
+  }
+  if (userId) {
+    authWaterId = { ...authWaterId, userId: userId };
+  }
+
+  return authWaterId;
+};
+
 export const getAllUsersController = async (req, res) => {
   try {
     const water = await getAllUsers();
@@ -21,8 +35,8 @@ export const addWaterController = async (req, res) => {
 
 export const editWaterByIdController = async (req, res) => {
   try {
-    const { id } = req.params;
-    const updatedWater = await editWater(id, req.body);
+    const authWaterId = setAuthWaterId(req);
+    const updatedWater = await editWater(authWaterId, req.body);
     if (!updatedWater) {
       return res.status(404).json({ message: 'Water record not found' });
     }
@@ -34,8 +48,8 @@ export const editWaterByIdController = async (req, res) => {
 
 export const deleteWaterController = async (req, res) => {
   try {
-    const { id } = req.params;
-    const deletedWater = await deleteWater(id);
+    const authWaterId = setAuthWaterId(req);
+    const deletedWater = await deleteWater(authWaterId);
     if (!deletedWater) {
       return res.status(404).json({ message: 'Water record not found' });
     }
@@ -46,24 +60,21 @@ export const deleteWaterController = async (req, res) => {
 };
 
 export const dayWaterController = async (req, res) => {
-try {
-  const { date } = req.params;
-  const water = await getDayWater(date);
-   res.json(water);
-} catch (error) {
-  res.status(500).json({ message: 'Server error' });
-}
+  try {
+    const { date } = req.params;
+    const water = await getDayWater(date);
+    res.json(water);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 export const monthWaterController = async (req, res) => {
-try {
-  const { date } = req.params;
-  const water = await getMonthWater(date);
-   res.json(water);
-} catch (error) {
-  res.status(500).json({ message: 'Server error' });
-}}
-
-export const todayWaterController = async (req, res) => {
-
+  try {
+    const { date } = req.params;
+    const water = await getMonthWater(date);
+    res.json(water);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
