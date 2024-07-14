@@ -50,7 +50,7 @@ usersRouter.get(
   ctrlWrapper(getCurrentUserDataController),
 );
 
-usersRouter.post(
+usersRouter.patch(
   '/update',
   authenticate,
   uploadPhoto.single('avatar'),
