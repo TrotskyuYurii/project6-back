@@ -17,8 +17,12 @@ const setAuthWaterId = (req) => {
 
 
 export const addWaterController = async (req, res) => {
+
   try {
-    const water = await addWater(req.body);
+    const water = await addWater({
+      userId: req.user._id,
+      ...req.body,
+    });
     res.status(201).json(water);
   } catch (error) {
     res.status(400).json({ message: error.message });
