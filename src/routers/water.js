@@ -7,8 +7,7 @@ import {
   deleteWaterController,
   dayWaterController,
   monthWaterController,
-  todayWaterController,
-  getAllWaterController,
+  getAllUsersController
 } from '../controllers/water.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { validateParams } from '../middlewares/validateParams.js';
@@ -29,8 +28,7 @@ waterRouter.put('/edit/:id', validateBody(editWaterSchema), ctrlWrapper(editWate
 
 waterRouter.delete('/remove/:id', ctrlWrapper(deleteWaterController));
 
-// тимчасовий шлях для перевірки
-waterRouter.get('/getAll', ctrlWrapper(getAllWaterController));
+waterRouter.get('/count-users', ctrlWrapper(getAllUsersController));
 
 waterRouter.get('/day/:date', validateParams(dayParamSchema), ctrlWrapper(dayWaterController));
 
