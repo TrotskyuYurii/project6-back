@@ -24,7 +24,7 @@ waterRouter.use(authenticate);
 
 waterRouter.post('/add', validateBody(addWaterSchema), ctrlWrapper(addWaterController));
 
-waterRouter.put('/edit/:id', validateBody(editWaterSchema), ctrlWrapper(editWaterByIdController));
+waterRouter.patch('/edit/:id', validateBody(editWaterSchema), ctrlWrapper(editWaterByIdController));
 
 waterRouter.delete('/remove/:id', ctrlWrapper(deleteWaterController));
 
