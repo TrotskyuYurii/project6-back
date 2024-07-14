@@ -33,7 +33,7 @@ export const addWaterController = async (req, res) => {
 export const editWaterByIdController = async (req, res) => {
   try {
     const authWaterId = setAuthWaterId(req);
-    const updatedWater = await editWater(authWaterId, req.body);
+    const updatedWater = await editWater(authWaterId, {...req.body });
     if (!updatedWater) {
       return res.status(404).json({ message: 'Water record not found' });
     }
