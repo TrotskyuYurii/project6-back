@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 
 const waterSchema = new Schema(
   {
-    user_id: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'user',
       required: true,
