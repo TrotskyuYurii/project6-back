@@ -6,8 +6,7 @@ import {
   editWaterByIdController,
   deleteWaterController,
   dayWaterController,
-  monthWaterController,
-  getAllUsersController
+  monthWaterController
 } from '../controllers/water.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { validateParams } from '../middlewares/validateParams.js';
@@ -28,8 +27,6 @@ waterRouter.post('/add', validateBody(addWaterSchema), ctrlWrapper(addWaterContr
 waterRouter.put('/edit/:id', validateBody(editWaterSchema), ctrlWrapper(editWaterByIdController));
 
 waterRouter.delete('/remove/:id', ctrlWrapper(deleteWaterController));
-
-waterRouter.get('/count-users', ctrlWrapper(getAllUsersController));
 
 waterRouter.get('/day/:date', validateParams(dayParamSchema), ctrlWrapper(dayWaterController));
 

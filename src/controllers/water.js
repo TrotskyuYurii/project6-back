@@ -1,4 +1,4 @@
-import { addWater, deleteWater, editWater, getAllUsers, getDayWater, getMonthWater } from '../services/water.js';
+import { addWater, deleteWater, editWater, getDayWater, getMonthWater } from '../services/water.js';
 
 
 const setAuthWaterId = (req) => {
@@ -15,14 +15,6 @@ const setAuthWaterId = (req) => {
   return authWaterId;
 };
 
-export const getAllUsersController = async (req, res) => {
-  try {
-    const water = await getAllUsers();
-    res.json(water);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
-  }
-};
 
 export const addWaterController = async (req, res) => {
   try {
