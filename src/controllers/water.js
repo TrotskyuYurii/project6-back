@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { addWater, deleteWater, editWater, getDayWater, getMonthWater } from '../services/water.js';
 
 
@@ -58,7 +59,15 @@ export const deleteWaterController = async (req, res) => {
 export const dayWaterController = async (req, res) => {
   try {
     const { date } = req.params;
-    const water = await getDayWater(date);
+    const authData = setAuthWaterId(req);
+    const userId = authData.userId instanceof mongoose.Types.ObjectId 
+      ? authData.userId 
+      : new mongoose.Types.ObjectId(authData.userId);
+
+    const water = await getDayWater(date, userId);
+    if (!water || water.length === 0) {
+      return res.status(404).json({ message: 'Water records not found for this user' });
+    }
     res.json(water);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -68,7 +77,15 @@ export const dayWaterController = async (req, res) => {
 export const monthWaterController = async (req, res) => {
   try {
     const { date } = req.params;
-    const water = await getMonthWater(date);
+    const authData = setAuthWaterId(req);
+    const userId = authData.userId instanceof mongoose.Types.ObjectId 
+      ? authData.userId 
+      : new mongoose.Types.ObjectId(authData.userId);
+
+    const water = await getMonthWater(date, userId);
+    if (!water || water.length === 0) {
+      return res.status(404).json({ message: 'Water records not found for this user' });
+    }
     res.json(water);
   } catch (error) {
     res.status(500).json({ message: error.message });
