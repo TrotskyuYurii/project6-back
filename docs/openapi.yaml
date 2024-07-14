@@ -11,7 +11,7 @@ tags:
   - name: Users
     description: Users operations.
 servers:
-  - url: <http://localhost:3000>
+  - url: <https://project6-back.onrender.com:3000>
 paths:
   /users/registered-users:
     get:
