@@ -1,10 +1,9 @@
-import { addWater, deleteWater, editWater, getAllWater, getDayWater, getMonthWater } from '../services/water.js';
+import { addWater, deleteWater, editWater, getAllUsers, getDayWater, getMonthWater } from '../services/water.js';
 
 
-// temp Controller for check db
-export const getAllWaterController = async (req, res) => {
+export const getAllUsersController = async (req, res) => {
   try {
-    const water = await getAllWater();
+    const water = await getAllUsers();
     res.json(water);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
