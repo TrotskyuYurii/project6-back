@@ -1,19 +1,19 @@
 import { isHttpError } from 'http-errors';
 
-//Функція обробки помилок 
-export const errorHandlerMiddleware = (error, req, res, next) => {
+export function errorHandlerMiddleware(err, req, res, next) {
+  if (isHttpError(err)) {
+    return res.status(err.status).json({
+      status: err.status,
+      message: err.message,
+      errors: err.errors || [],
+    });
+  }
 
-    if (isHttpError(error)) {
-      res.status(error.status).json({
-      status: error.status,
-      message: error.message,
-      data: {"message": error.message},
-      errorsValidation: error.errors || [],
-      });
-    } else {
-      res.status(500).json({
-      status: 500,
-      message: error.message,
-      });
-    }
-  };
+  res.status(500).json({
+    status: 500,
+    message: 'Something went wrong',
+    data: {
+      message: err.message,
+    },
+  });
+}

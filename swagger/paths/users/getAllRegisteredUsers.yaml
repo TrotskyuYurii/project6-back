@@ -1,0 +1,40 @@
+tags:
+  - Users
+summary: Get all registered users
+operationId: getAllRegisteredUsers
+description: 'Get information about all registered users in application'
+security: []
+responses:
+  '200':
+    description: Get all registered users
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully get current user data!
+            data:
+              type: object
+              required:
+                - totalRegisteredUsers
+                - users
+              properties:
+                totalRegisteredUsers:
+                  type: number
+                  example: 13
+                users:
+                  type: array
+                  items:
+                    $ref: '../../components/schemas/user.yaml'
+
+  '404':
+    $ref: ..\..\components\responses\404.yaml

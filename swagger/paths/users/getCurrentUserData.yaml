@@ -1,0 +1,32 @@
+tags:
+  - Users
+summary: Get current user data
+operationId: getCurrentUserData
+description: 'Get information about the current registered user'
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: Get current user data
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully get current user data!
+            data:
+              type: object
+              $ref: '../../components/schemas/user.yaml'
+  '404':
+    $ref: ..\..\components\responses\404.yaml
+  '401':
+    $ref: ..\..\components\responses\401.yaml
