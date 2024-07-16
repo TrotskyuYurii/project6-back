@@ -42,12 +42,6 @@ paths:
   /users/reset-password:
     post:
       $ref: '../swagger/paths/users/resetPassword.yaml'
-  /users/get-oauth-url:
-    get:
-      $ref: '../swagger/paths/users/getOAuthUrl.yaml'
-  /users/confirm-oauth:
-    post:
-      $ref: '../swagger/paths/users/confirmOAuth.yaml'
   /water/add:
     post:
       $ref: '../swagger/paths/water/postWaterAdd.yaml'
