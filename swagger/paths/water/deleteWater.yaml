@@ -1,0 +1,20 @@
+tags:
+  - Water
+summary: Delete water entry by ID
+operationId: deleteWaterEntryById
+description: Deletes an existing water entry by ID
+parameters:
+  - name: waterId
+    in: path
+    required: true
+    schema:
+      type: string
+responses:
+  '204':
+    description: Water entry deleted successfully
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'

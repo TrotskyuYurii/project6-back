@@ -1,0 +1,23 @@
+tags:
+  - Water
+summary: Add water entry
+operationId: addWaterEntry
+description: Adds a new water entry to the system
+requestBody:
+  description: Water entry to add
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../../components/schemas/water.yaml#/components/schemas/AddWaterSchema'
+responses:
+  '201':
+    description: Water entry added successfully
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/water.yaml#/components/schemas/AddWaterSchema'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'

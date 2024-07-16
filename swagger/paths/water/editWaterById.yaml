@@ -1,0 +1,31 @@
+tags:
+  - Water
+summary: Edit water entry by ID
+operationId: editWaterEntryById
+description: Edits an existing water entry by ID
+parameters:
+  - name: waterId
+    in: path
+    required: true
+    schema:
+      type: string
+requestBody:
+  description: Water entry to edit
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../../components/schemas/water.yaml#/components/schemas/EditWaterSchema'
+responses:
+  '200':
+    description: Water entry edited successfully
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/water.yaml#/components/schemas/EditWaterSchema'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'

@@ -10,6 +10,8 @@ info:
 tags:
   - name: Users
     description: Users operations.
+  - name: Water
+    description: Water operations.
 servers:
   - url: <https://project6-back.onrender.com:3000>
 paths:
@@ -46,8 +48,26 @@ paths:
   /users/confirm-oauth:
     post:
       $ref: '../swagger/paths/users/confirmOAuth.yaml'
+  /water/add:
+    post:
+      $ref: '../swagger/paths/water/postWaterAdd.yaml'
+  /water/edit/{waterId}:
+    patch:
+      $ref: '../swagger/paths/water/editWaterById.yaml'
+  /water/remove/{waterId}:
+    delete:
+      $ref: '../swagger/paths/water/deleteWater.yaml'
+  /water/day/{date}:
+    get:
+      $ref: '../swagger/paths/water/dayWater.yaml'
+  /water/month/{date}:
+    get:
+      $ref: '../swagger/paths/water/monthWater.yaml'
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+  schemas:
+    Water:
+      $ref: './components/schemas/water.yaml'
