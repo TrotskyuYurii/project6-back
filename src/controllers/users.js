@@ -57,9 +57,7 @@ export async function getCurrentUserDataController(req, res) {
   res.status(200).json({
     status: 200,
     message: 'Successfully get current user data!',
-    data: {
-      userData,
-    },
+    data: userData,
   });
 }
 
