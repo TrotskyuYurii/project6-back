@@ -4,7 +4,7 @@ import usersRouter from './users.js';
 
 const rootRouter = Router();
 
-rootRouter.use('/water', waterRouter);
 rootRouter.use('/users', usersRouter);
+rootRouter.use('/water', waterRouter);
 
 export default rootRouter;
