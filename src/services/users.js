@@ -84,7 +84,7 @@ export async function sendResetEmail(email) {
 
   const html = template({
     name: user.name,
-    link: `${env(ENV_VARS.APP_DOMAIN)}/auth/reset-password?token=${token}`,
+    link: `http://localhost:5173/reset-password?token=${token}`,
   });
 
   try {
