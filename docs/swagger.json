@@ -11,13 +11,17 @@
   },
   "servers": [
     {
-      "url": "<http://localhost:3000>"
+      "url": "<https://project6-back.onrender.com:3000>"
     }
   ],
   "tags": [
     {
       "name": "Users",
       "description": "Users operations."
+    },
+    {
+      "name": "Water",
+      "description": "Water operations."
     }
   ],
   "paths": {
@@ -806,6 +810,217 @@
           }
         }
       }
+    },
+    "/water/add": {
+      "post": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Add water entry",
+        "operationId": "addWaterEntry",
+        "description": "Adds a new water entry to the system",
+        "requestBody": {
+          "description": "Water entry to add",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddWaterSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Water entry added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddWaterSchema"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/water/edit/{waterId}": {
+      "patch": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Edit water entry by ID",
+        "operationId": "editWaterEntryById",
+        "description": "Edits an existing water entry by ID",
+        "parameters": [
+          {
+            "name": "waterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Water entry to edit",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditWaterSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Water entry edited successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditWaterSchema"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
+    },
+    "/water/remove/{waterId}": {
+      "delete": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Delete water entry by ID",
+        "operationId": "deleteWaterEntryById",
+        "description": "Deletes an existing water entry by ID",
+        "parameters": [
+          {
+            "name": "waterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Water entry deleted successfully"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
+    },
+    "/water/day/{date}": {
+      "get": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Get daily water entries",
+        "operationId": "getDailyWaterEntries",
+        "description": "Retrieves water entries for a specific day",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{2}-\\d{2}-\\d{4}$",
+              "example": "11-11-2024"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daily water entries retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AddWaterSchema"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
+    },
+    "/water/month/{date}": {
+      "get": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Get monthly water entries",
+        "operationId": "getMonthlyWaterEntries",
+        "description": "Retrieves water entries for a specific month",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{2}-\\d{2}-\\d{4}$",
+              "example": "11-11-2024"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monthly water entries retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AddWaterSchema"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -872,9 +1087,98 @@
             "example": "https://some-avatar-url.png"
           }
         }
+      },
+      "AddWaterSchema": {
+        "type": "object",
+        "required": [
+          "date",
+          "amount",
+          "time"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of water consumption in DD-MM-YYYY format"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 50,
+            "maximum": 1500,
+            "description": "Amount of water consumed in milliliters"
+          },
+          "time": {
+            "type": "string",
+            "format": "time",
+            "description": "Time of water consumption in HH:mm format"
+          }
+        }
+      },
+      "EditWaterSchema": {
+        "type": "object",
+        "required": [
+          "date",
+          "amount",
+          "time"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of water consumption in DD-MM-YYYY format"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 50,
+            "maximum": 1500,
+            "description": "Amount of water consumed in milliliters"
+          },
+          "time": {
+            "type": "string",
+            "format": "time",
+            "description": "Time of water consumption in HH:mm format"
+          }
+        }
       }
     },
     "responses": {
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "BadRequest"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid request data"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "401": {
         "description": "Unauthorized error",
         "content": {
