@@ -68,6 +68,6 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-  # schemas:
-  #   Water:
-  #     $ref: './components/schemas/water.yaml'
+  schemas:
+    Water:
+      $ref: '../swagger/components/schemas/water.yaml'

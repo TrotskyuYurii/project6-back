@@ -1031,6 +1031,9 @@
       }
     },
     "schemas": {
+      "Water": {
+        "$ref": "#/components/schemas/water"
+      },
       "user": {
         "type": "object",
         "properties": {
@@ -1137,6 +1140,77 @@
             "type": "string",
             "format": "time",
             "description": "Time of water consumption in HH:mm format"
+          }
+        }
+      },
+      "water": {
+        "components": {
+          "schemas": {
+            "AddWaterSchema": {
+              "type": "object",
+              "required": [
+                "date",
+                "amount",
+                "time"
+              ],
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Date of water consumption in DD-MM-YYYY format"
+                },
+                "amount": {
+                  "type": "number",
+                  "minimum": 50,
+                  "maximum": 1500,
+                  "description": "Amount of water consumed in milliliters"
+                },
+                "time": {
+                  "type": "string",
+                  "format": "time",
+                  "description": "Time of water consumption in HH:mm format"
+                }
+              }
+            },
+            "EditWaterSchema": {
+              "type": "object",
+              "required": [
+                "date",
+                "amount",
+                "time"
+              ],
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Date of water consumption in DD-MM-YYYY format"
+                },
+                "amount": {
+                  "type": "number",
+                  "minimum": 50,
+                  "maximum": 1500,
+                  "description": "Amount of water consumed in milliliters"
+                },
+                "time": {
+                  "type": "string",
+                  "format": "time",
+                  "description": "Time of water consumption in HH:mm format"
+                }
+              }
+            },
+            "DayParamSchema": {
+              "type": "object",
+              "required": [
+                "date"
+              ],
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Date for which to retrieve water consumption data in DD-MM-YYYY format"
+                }
+              }
+            }
           }
         }
       }
