@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import cookiesParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import swaggerDocs from './middlewares/swaggerDocs.js';
 
 import { env } from './utils/env.js';
@@ -21,7 +21,7 @@ export const setupServer = () => {
     }),
   );
 
-  app.use(cookiesParser());
+  app.use(cookieParser());
 
   app.use(
     cors({

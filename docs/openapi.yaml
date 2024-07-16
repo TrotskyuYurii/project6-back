@@ -11,7 +11,7 @@ tags:
   - name: Users
     description: Users operations.
 servers:
-  - url: <https://project6-back.onrender.com:3000>
+  - url: https://project6-back.onrender.com
 paths:
   /users/registered-users:
     get:
@@ -40,12 +40,6 @@ paths:
   /users/reset-password:
     post:
       $ref: '../swagger/paths/users/resetPassword.yaml'
-  /users/get-oauth-url:
-    get:
-      $ref: '../swagger/paths/users/getOAuthUrl.yaml'
-  /users/confirm-oauth:
-    post:
-      $ref: '../swagger/paths/users/confirmOAuth.yaml'
 components:
   securitySchemes:
     bearerAuth:

@@ -19,6 +19,8 @@ requestBody:
             description: "User's name"
             type: string
             example: 'John Doe'
+            minLength: 2
+            maxLength: 20
           email:
             description: "User's email"
             type: string
