@@ -1,3 +1,6 @@
+security:
+  - BearerAuth: []
+  
 components:
   schemas:
     AddWaterSchema:
