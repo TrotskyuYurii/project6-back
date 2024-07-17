@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "<https://project6-back.onrender.com:3000>"
+      "url": "https://project6-back.onrender.com"
     }
   ],
   "tags": [
@@ -116,7 +116,10 @@
                   },
                   "password": {
                     "description": "User's password",
-                    "type": "string"
+                    "type": "string",
+                    "example": "12John34SecretPwd",
+                    "minLength": 7,
+                    "maxLength": 32
                   }
                 }
               }
@@ -216,7 +219,10 @@
                   },
                   "password": {
                     "description": "User's password",
-                    "type": "string"
+                    "type": "string",
+                    "example": "12John34SecretPwd",
+                    "minLength": 7,
+                    "maxLength": 32
                   }
                 }
               }
@@ -380,7 +386,9 @@
                   "name": {
                     "description": "User's name",
                     "type": "string",
-                    "example": "John Doe"
+                    "example": "John Doe",
+                    "minLength": 2,
+                    "maxLength": 20
                   },
                   "email": {
                     "description": "User's email",
@@ -662,7 +670,10 @@
                 "properties": {
                   "password": {
                     "description": "Your new password",
-                    "type": "string"
+                    "type": "string",
+                    "example": "12John34SecretPwd",
+                    "minLength": 7,
+                    "maxLength": 32
                   },
                   "token": {
                     "description": "Token from the link that was in the password reset message",

@@ -22,6 +22,9 @@ requestBody:
           password:
             description: "User's password"
             type: string
+            example: '12John34SecretPwd'
+            minLength: 7
+            maxLength: 32
 responses:
   '200':
     description: Login a user

@@ -2,12 +2,12 @@ import Joi from 'joi';
 
 export const registerUserSchema = Joi.object({
   email: Joi.string().email(),
-  password: Joi.string().required(),
+  password: Joi.string().min(7).max(32).required(),
 });
 
 export const loginUserSchema = Joi.object({
   email: Joi.string().email(),
-  password: Joi.string().required(),
+  password: Joi.string().min(7).max(32).required(),
 });
 
 export const updateUserSchema = Joi.object({
@@ -26,7 +26,7 @@ export const sendResetEmailSchema = Joi.object({
 
 export const resetPasswordSchema = Joi.object({
   token: Joi.string().required(),
-  password: Joi.string().required(),
+  password: Joi.string().min(7).max(32).required(),
 });
 
 export const loginOrSignupWithGoogleSchema = Joi.object({
