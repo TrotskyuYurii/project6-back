@@ -1,0 +1,6 @@
+{
+  "key": "Hallo {{userName}}",
+  "email": "E-Mail",
+  "password": "Passwort",
+  "sign_in": "Anmelden"
+}

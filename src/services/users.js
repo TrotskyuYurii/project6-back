@@ -164,6 +164,7 @@ export async function getAllRegisteredUsers() {
     UsersCollection.find(),
   ]);
 
+  
   if (!users) {
     throw createHttpError(404, 'Users not found');
   }
