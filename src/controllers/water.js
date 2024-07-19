@@ -50,7 +50,7 @@
       if (!deletedWater) {
         return res.status(404).json({ message: 'Water record not found' });
       }
-      res.status(204).send();
+      res.status(200).json(deletedWater);
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
@@ -60,8 +60,8 @@
     try {
       const { date } = req.params;
       const authData = setAuthWaterId(req);
-      const userId = authData.userId instanceof mongoose.Types.ObjectId 
-        ? authData.userId 
+      const userId = authData.userId instanceof mongoose.Types.ObjectId
+        ? authData.userId
         : new mongoose.Types.ObjectId(authData.userId);
 
       const water = await getDayWater(date, userId);
@@ -78,8 +78,8 @@
     try {
       const { date } = req.params;
       const authData = setAuthWaterId(req);
-      const userId = authData.userId instanceof mongoose.Types.ObjectId 
-        ? authData.userId 
+      const userId = authData.userId instanceof mongoose.Types.ObjectId
+        ? authData.userId
         : new mongoose.Types.ObjectId(authData.userId);
 
       const water = await getMonthWater(date, userId);
