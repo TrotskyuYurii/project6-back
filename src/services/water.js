@@ -27,7 +27,9 @@ export const editWater = async (waterId, payload, options = {}) => {
 export const deleteWater = async (waterId) => {
   const water = await WatersCollection.findOneAndDelete(waterId);
 
-  return water;
+  return {
+    _id: water._id
+  };
 };
 
   export const getDayWater = async (date, userId) => {
