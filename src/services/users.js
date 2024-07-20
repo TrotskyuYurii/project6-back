@@ -7,9 +7,9 @@ import { SessionsCollection } from '../db/models/sessionModel.js';
 import generateTokens from '../utils/generateTokens.js';
 import sendMail from '../utils/sendMail.js';
 import { env } from '../utils/env.js';
-import { ENV_VARS } from '../const/const.js';
+import { ENV_VARS, TEMPLATE_SOURCE } from '../const/const.js';
 import { UsersCollection } from '../db/models/userModel.js';
-import { TEMPLATE_SOURCE } from '../const/const.js';
+import { getLocalizedMessage } from '../utils/i18nHelper.js';
 import {
   getFullNameFromGoogleTokenPayload,
   validateCode,
@@ -17,7 +17,7 @@ import {
 
 export async function registerUser(payload) {
   const user = await UsersCollection.findOne({ email: payload.email });
-  if (user) throw createHttpError(409, 'Email is already in use!');
+  if (user) throw createHttpError(409, getLocalizedMessage(req, 'error.emailInUse'));
 
   const hashedPassword = await bcrypt.hash(payload.password, 10);
 
@@ -33,11 +33,11 @@ export async function loginUser(payload) {
   });
 
   if (!user) {
-    throw createHttpError(401, 'Wrong email or password!');
+    throw createHttpError(401, getLocalizedMessage(req, 'error.invalidCredentials'));
   }
 
   const isEqual = await bcrypt.compare(payload.password, user.password);
-  if (!isEqual) throw createHttpError(401, 'Wrong email or password!');
+  if (!isEqual) throw createHttpError(401, getLocalizedMessage(req, 'error.invalidCredentials'));
 
   await SessionsCollection.deleteOne({ userId: user._id });
 
@@ -51,10 +51,10 @@ export async function refreshUserSession(refreshToken) {
   const session = await SessionsCollection.findOne({
     refreshToken,
   });
-  if (!session) throw createHttpError(404, 'Session not found!');
+  if (!session) throw createHttpError(404, getLocalizedMessage(req, 'error.sessionNotFound'));
 
   if (session.refreshTokenValidUntil < Date.now()) {
-    throw createHttpError(401, 'Refresh token is expired!');
+    throw createHttpError(401, getLocalizedMessage(req, 'error.refreshTokenExpired'));
   }
 
   await SessionsCollection.deleteOne({ userId: session.userId });
@@ -73,7 +73,7 @@ export async function sendResetEmail(email) {
   const user = await UsersCollection.findOne({ email });
 
   if (!user) {
-    throw createHttpError(404, 'User not found!');
+    throw createHttpError(404, getLocalizedMessage(req, 'error.userNotFound'));
   }
 
   const token = jwt.sign({ sub: user._id, email }, env(ENV_VARS.JWT_SECRET), {
@@ -96,10 +96,7 @@ export async function sendResetEmail(email) {
     });
   } catch (error) {
     console.log(error);
-    throw createHttpError(
-      500,
-      'Failed to send the email, please try again later.',
-    );
+    throw createHttpError(500, getLocalizedMessage(req, 'error.emailSendFailed'));
   }
 }
 
@@ -110,9 +107,9 @@ export async function resetPassword(payload) {
     entries = jwt.verify(payload.token, env(ENV_VARS.JWT_SECRET));
   } catch (error) {
     if (error instanceof Error) {
-      throw createHttpError(401, error.message);
+      throw createHttpError(401, getLocalizedMessage(req, error.message));
     }
-    throw createHttpError(401, 'Token is expired or invalid!');
+    throw createHttpError(401, getLocalizedMessage(req, 'error.tokenExpiredOrInvalid'));
   }
 
   const user = await UsersCollection.findOne({
@@ -121,7 +118,7 @@ export async function resetPassword(payload) {
   });
 
   if (!user) {
-    throw createHttpError(404, 'User not found!');
+    throw createHttpError(404, getLocalizedMessage(req, 'error.userNotFound'));
   }
 
   const newPassword = await bcrypt.hash(payload.password, 10);
@@ -135,7 +132,7 @@ export async function getCurrentUserData(email) {
   const user = UsersCollection.findOne({ email });
 
   if (!user) {
-    throw createHttpError(404, 'User not found!');
+    throw createHttpError(404, getLocalizedMessage(req, 'error.userNotFound'));
   }
 
   return user;
@@ -152,7 +149,7 @@ export async function updateUser(user, { avatar, ...payload }) {
   );
 
   if (!rawResult || !rawResult.value) {
-    throw createHttpError(404, 'User not found');
+    throw createHttpError(404, getLocalizedMessage(req, 'error.userNotFound'));
   }
 
   return rawResult.value;
@@ -164,9 +161,8 @@ export async function getAllRegisteredUsers() {
     UsersCollection.find(),
   ]);
 
-  
   if (!users) {
-    throw createHttpError(404, 'Users not found');
+    throw createHttpError(404, getLocalizedMessage(req, 'error.usersNotFound'));
   }
 
   return { usersCount, users };
@@ -176,7 +172,7 @@ export async function loginOrSignupWithGoogle(code) {
   const loginTicket = validateCode(code);
   const tokenPayload = (await loginTicket).getPayload();
 
-  if (!tokenPayload) throw createHttpError(401, 'Unauthorized');
+  if (!tokenPayload) throw createHttpError(401, getLocalizedMessage(req, 'error.unauthorized'));
 
   let user = await UsersCollection.findOne({ email: tokenPayload.email });
 

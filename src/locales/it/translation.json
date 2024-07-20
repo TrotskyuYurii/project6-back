@@ -1,4 +1,52 @@
 {
+  "registration": {
+    "success": "Utente registrato con successo!"
+  },
+  "login": {
+    "success": "Accesso utente riuscito!"
+  },
+  "users": {
+    "getAllSuccess": "Tutti gli utenti registrati sono stati recuperati con successo!"
+  },
+  "user": {
+    "getCurrentDataSuccess": "Dati dell'utente corrente sono stati recuperati con successo!",
+    "updateSuccess": "Dati dell'utente sono stati aggiornati con successo!"
+  },
+  "googleOAuth": {
+    "urlSuccess": "URL di Google OAuth recuperata con successo!",
+    "loginSuccess": "Accesso riuscito con Google OAuth!"
+  },
+  "session": {
+    "refreshSuccess": "Sessione aggiornata con successo!"
+  },
+  "resetEmail": {
+    "sentSuccess": "Email per il reset della password inviata con successo!"
+  },
+  "passwordChange": {
+    "success": "Password cambiata con successo!"
+  },
+  "error": {
+    "addWater": "Impossibile aggiungere i dati dell'acqua!",
+    "editWater": "Impossibile modificare i dati dell'acqua!",
+    "deleteWater": "Impossibile eliminare i dati dell'acqua!",
+    "waterNotFound": "I dati dell'acqua non trovati!",
+    "noWaterRecords": "Nessun dei dati dell'acqua è stato trovato per questo utente!",
+    "serverError": "Si è verificato un errore imprevisto del server!",
+    "authorizationHeaderMissing": "Per favore fornisci l'intestazione dell'autorizazzione",
+    "authHeaderInvalid": "L'intestazione dell'autorizzazione deve essere di tipo bearer",
+    "sessionNotFound": "Sessione non trovata",
+    "accessTokenExpired": "Il token di accesso è scaduto",
+    "userNotFound": "Utente associato a questa sessione non trovato",
+    "routeNotFound": "Route non trovato",
+    "cantLoadSwaggerDocs": "Impossibile caricare i documenti Swagger",
+    "emailInUse": "L'email è già in uso!",
+    "invalidCredentials": "Email o password errati!",
+    "refreshTokenExpired": "Il token di aggiornamento è scaduto!",
+    "emailSendFailed": "Impossibile inviare l'email, riprova più tardi.",
+    "tokenExpiredOrInvalid": "Il token è scaduto o non valido!",
+    "usersNotFound": "Utenti non trovati",
+    "unauthorized": "Non autorizzato"
+  },
   "key": "Ciao {{userName}}",
   "email": "Email",
   "password": "Password",
