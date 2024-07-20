@@ -1,4 +1,52 @@
 {
+  "registration": {
+    "success": "Benutzer erfolgreich registriert!"
+  },
+  "login": {
+    "success": "Benutzer erfolgreich eingeloggt!"
+  },
+  "users": {
+    "getAllSuccess": "Alle registrierten Benutzer erfolgreich abgerufen!"
+  },
+  "user": {
+    "getCurrentDataSuccess": "Aktuelle Benutzerdaten erfolgreich abgerufen!",
+    "updateSuccess": "Benutzerdaten erfolgreich aktualisiert!"
+  },
+  "googleOAuth": {
+    "urlSuccess": "Google OAuth URL erfolgreich abgerufen!",
+    "loginSuccess": "Erfolgreich mit Google OAuth eingeloggt!"
+  },
+  "session": {
+    "refreshSuccess": "Sitzung erfolgreich aktualisiert!"
+  },
+  "resetEmail": {
+    "sentSuccess": "E-Mail zum Zurücksetzen des Passworts erfolgreich gesendet!"
+  },
+  "passwordChange": {
+    "success": "Passwort erfolgreich geändert!"
+  },
+  "error": {
+    "addWater": "Fehler beim Hinzufügen des Wassereintrags!",
+    "editWater": "Fehler beim Bearbeiten des Wassereintrags!",
+    "deleteWater": "Fehler beim Löschen des Wassereintrags!",
+    "waterNotFound": "Wassereintrag nicht gefunden!",
+    "noWaterRecords": "Keine Wassereinträge für diesen Benutzer gefunden!",
+    "serverError": "Ein unerwarteter Serverfehler ist aufgetreten!",
+    "authorizationHeaderMissing": "Bitte geben Sie den Authorization-Header an",
+    "authHeaderInvalid": "Der Authorization-Header muss vom Typ Bearer sein",
+    "sessionNotFound": "Sitzung nicht gefunden",
+    "accessTokenExpired": "Access-Token ist abgelaufen",
+    "userNotFound": "Benutzer, der mit dieser Sitzung verbunden ist, wurde nicht gefunden",
+    "routeNotFound": "Route nicht gefunden",
+    "cantLoadSwaggerDocs": "Swagger-Dokumente können nicht geladen werden",
+    "emailInUse": "E-Mail wird bereits verwendet!",
+    "invalidCredentials": "Falsche E-Mail oder Passwort!",
+    "refreshTokenExpired": "Refresh-Token ist abgelaufen!",
+    "emailSendFailed": "Fehler beim Senden der E-Mail, bitte versuchen Sie es später erneut.",
+    "tokenExpiredOrInvalid": "Token ist abgelaufen oder ungültig!",
+    "usersNotFound": "Benutzer nicht gefunden",
+    "unauthorized": "Unberechtigt"
+  },
   "key": "Hallo {{userName}}",
   "email": "E-Mail",
   "password": "Passwort",
