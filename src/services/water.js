@@ -11,21 +11,22 @@ export const editWater = async (waterId, payload, options = {}) => {
     payload,
     {
       new: true,
-      includeResultMetadata: true,
       ...options,
     },
   );
 
-  if (!rawResult || !rawResult.value) return null;
+  if (!rawResult) return null;
 
-  return {
-    water: rawResult.value,
-    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
-  };
+  return rawResult;
 };
 
 export const deleteWater = async (waterId) => {
+    // console.log(waterId);
+
   const water = await WatersCollection.findOneAndDelete(waterId);
+    // console.log(water);
+
+  if (!water) return null;
 
   return water;
 };
