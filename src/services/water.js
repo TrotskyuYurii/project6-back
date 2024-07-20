@@ -52,14 +52,13 @@ export const deleteWater = async (waterId) => {
       const [_, month, year] = date.split('-');
       const dateRegex = new RegExp(`^\\d{2}-${month}-${year}$`);
   
-      // Отримуємо норму води для користувача
+      // норма води для користувача
       const user = await UsersCollection.findById(userId);
       if (!user) {
         throw new Error('User not found');
       }
-      const waterNorma = user.waterNorma * 1000; // Переводимо в мілілітри
+      const waterNorma = user.waterNorma * 1000; 
   
-      // Отримуємо всі записи про воду за вказаний місяць
       const waterRecords = await WatersCollection.find({
         date: dateRegex,
         userId: userId
