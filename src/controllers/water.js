@@ -90,8 +90,11 @@ export const monthWaterController = async (req, res) => {
       : new mongoose.Types.ObjectId(authData.userId);
 
     const water = await getMonthWater(date, userId);
+    // if (!water || water.length === 0) {
+    //   return res.status(404).json({ message: 'Water records not found for this user' });
+    // }
     if (!water || water.length === 0) {
-      return res.status(404).json({ message: 'Water records not found for this user' });
+      return res.status(200).json({ message: 'Water records not found for this user' });
     }
     res.json(water);
   } catch (error) {
