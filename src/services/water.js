@@ -1,4 +1,6 @@
 import { WatersCollection } from '../db/models/waterModel.js';
+import { UsersCollection } from '../db/models/userModel.js';
+
 
 
 export const addWater = async (payload) => {
@@ -46,12 +48,55 @@ export const deleteWater = async (waterId) => {
 
 
   export const getMonthAgrigateWater = async (date, userId) => {
-
-    const [_, month, year] = date.split('-');
-    const dateRegex = new RegExp(`^\\d{2}-${month}-${year}$`);
+    try {
+      const [_, month, year] = date.split('-');
+      const dateRegex = new RegExp(`^\\d{2}-${month}-${year}$`);
   
-      const result = WatersCollection.find({date: dateRegex, userId: userId});
-
-      return result;
-    };
+      // Отримуємо норму води для користувача
+      const user = await UsersCollection.findById(userId);
+      if (!user) {
+        throw new Error('User not found');
+      }
+      const waterNorma = user.waterNorma * 1000; // Переводимо в мілілітри
+  
+      // Отримуємо всі записи про воду за вказаний місяць
+      const waterRecords = await WatersCollection.find({
+        date: dateRegex,
+        userId: userId
+      }).lean();
+  
+      // Групуємо записи по датах
+      const groupedByDate = waterRecords.reduce((acc, record) => {
+        if (!acc[record.date]) {
+          acc[record.date] = [];
+        }
+        acc[record.date].push({
+          _id: record._id,
+          time: record.time,
+          amount: record.amount
+        });
+        return acc;
+      }, {});
+  
+      // Формуємо результат
+      const data = Object.entries(groupedByDate).map(([date, waters]) => {
+        const totalAmount = waters.reduce((sum, water) => sum + water.amount, 0);
+        const percentOfNorma = Number(((totalAmount / waterNorma) * 100).toFixed(2));
+        
+        return {
+          date,
+          percentOfNorma,
+          waters
+        };
+      });
+  
+      return {
+        userId: userId.toString(),
+        data: data
+      };
+    } catch (error) {
+      console.error('Error in getMonthAgrigateWater:', error);
+      throw error;
+    }
+  };
   
