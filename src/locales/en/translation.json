@@ -30,7 +30,7 @@
     "editWater": "Failed to edit water record!",
     "deleteWater": "Failed to delete water record!",
     "waterNotFound": "Water record not found!",
-    "noWaterRecords": "No water records found for this user!",
+    "noWaterRecords": "Water records not found for this user!",
     "serverError": "An unexpected server error occurred!",
     "authorizationHeaderMissing": "Please provide Authorization header",
     "authHeaderInvalid": "Auth header should be of type Bearer",

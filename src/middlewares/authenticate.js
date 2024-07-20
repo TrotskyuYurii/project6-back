@@ -1,8 +1,7 @@
 import createHttpError from 'http-errors';
 import { SessionsCollection } from '../db/models/sessionModel.js';
 import { UsersCollection } from '../db/models/userModel.js';
-import i18next from '../i18n.js';
-import { getLocalizedMessage } from '../utils/i18nHelper.js';
+
 
 export default async function authenticate(req, res, next) {
   const authHeader = req.get('Authorization');
