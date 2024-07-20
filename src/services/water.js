@@ -42,3 +42,16 @@ export const deleteWater = async (waterId) => {
 
     return WatersCollection.find({date: dateRegex, userId: userId});
   };
+
+
+
+  export const getMonthAgrigateWater = async (date, userId) => {
+
+    const [_, month, year] = date.split('-');
+    const dateRegex = new RegExp(`^\\d{2}-${month}-${year}$`);
+  
+      const result = WatersCollection.find({date: dateRegex, userId: userId});
+
+      return result;
+    };
+  
