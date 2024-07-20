@@ -105,7 +105,6 @@ export const monthWaterController = async (req, res) => {
   }
 };
 
-
 export const monthAgrigateWaterController = async (req, res) => {
   try {
     const { date } = req.params;
@@ -114,14 +113,11 @@ export const monthAgrigateWaterController = async (req, res) => {
       ? authData.userId
       : new mongoose.Types.ObjectId(authData.userId);
 
-    const water = await getMonthAgrigateWater(date, userId);
-    // if (!water || water.length === 0) {
-    //   return res.status(404).json({ message: 'Water records not found for this user' });
-    // }
-    if (!water || water.length === 0) {
+    const result = await getMonthAgrigateWater(date, userId);
+    if (!result.data || result.data.length === 0) {
       return res.status(200).json({ message: getLocalizedMessage(req, 'error.noWaterRecords'), });
     }
-    res.json(water);
+    res.json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
