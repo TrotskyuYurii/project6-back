@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { addWater, deleteWater, editWater, getDayWater, getMonthWater } from '../services/water.js';
+import { addWater, deleteWater, editWater, getDayWater, getMonthWater, getMonthAgrigateWater } from '../services/water.js';
 
 
 const { ObjectId } = mongoose.Types;
@@ -69,8 +69,11 @@ export const dayWaterController = async (req, res) => {
       : new mongoose.Types.ObjectId(authData.userId);
 
     const water = await getDayWater(date, userId);
+    // if (!water || water.length === 0) {
+    //   return res.status(404).json({ message: 'Water records not found for this user' });
+    // }
     if (!water || water.length === 0) {
-      return res.status(404).json({ message: 'Water records not found for this user' });
+      return res.status(200).json({ message: 'Water records not found for this user' });
     }
     res.json(water);
   } catch (error) {
@@ -87,8 +90,33 @@ export const monthWaterController = async (req, res) => {
       : new mongoose.Types.ObjectId(authData.userId);
 
     const water = await getMonthWater(date, userId);
+    // if (!water || water.length === 0) {
+    //   return res.status(404).json({ message: 'Water records not found for this user' });
+    // }
     if (!water || water.length === 0) {
-      return res.status(404).json({ message: 'Water records not found for this user' });
+      return res.status(200).json({ message: 'Water records not found for this user' });
+    }
+    res.json(water);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+export const monthAgrigateWaterController = async (req, res) => {
+  try {
+    const { date } = req.params;
+    const authData = setAuthWaterId(req);
+    const userId = authData.userId instanceof mongoose.Types.ObjectId
+      ? authData.userId
+      : new mongoose.Types.ObjectId(authData.userId);
+
+    const water = await getMonthAgrigateWater(date, userId);
+    // if (!water || water.length === 0) {
+    //   return res.status(404).json({ message: 'Water records not found for this user' });
+    // }
+    if (!water || water.length === 0) {
+      return res.status(200).json({ message: 'Water records not found for this user' });
     }
     res.json(water);
   } catch (error) {
