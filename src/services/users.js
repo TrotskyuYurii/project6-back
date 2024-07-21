@@ -17,14 +17,27 @@ import {
 
 export async function registerUser(payload) {
   const user = await UsersCollection.findOne({ email: payload.email });
-  if (user) throw createHttpError(409, getLocalizedMessage(req, 'error.emailInUse'));
+  if (user)
+    throw createHttpError(409, getLocalizedMessage(req, 'error.emailInUse'));
 
   const hashedPassword = await bcrypt.hash(payload.password, 10);
 
-  return await UsersCollection.create({
+  const createdUser = await UsersCollection.create({
     ...payload,
     password: hashedPassword,
   });
+
+  await SessionsCollection.deleteOne({ userId: createdUser._id });
+
+  const session = await SessionsCollection.create({
+    userId: createdUser._id,
+    ...generateTokens(),
+  });
+
+  return {
+    createdUser,
+    session,
+  };
 }
 
 export async function loginUser(payload) {
@@ -33,11 +46,18 @@ export async function loginUser(payload) {
   });
 
   if (!user) {
-    throw createHttpError(401, getLocalizedMessage(req, 'error.invalidCredentials'));
+    throw createHttpError(
+      401,
+      getLocalizedMessage(req, 'error.invalidCredentials'),
+    );
   }
 
   const isEqual = await bcrypt.compare(payload.password, user.password);
-  if (!isEqual) throw createHttpError(401, getLocalizedMessage(req, 'error.invalidCredentials'));
+  if (!isEqual)
+    throw createHttpError(
+      401,
+      getLocalizedMessage(req, 'error.invalidCredentials'),
+    );
 
   await SessionsCollection.deleteOne({ userId: user._id });
 
@@ -51,10 +71,17 @@ export async function refreshUserSession(refreshToken) {
   const session = await SessionsCollection.findOne({
     refreshToken,
   });
-  if (!session) throw createHttpError(404, getLocalizedMessage(req, 'error.sessionNotFound'));
+  if (!session)
+    throw createHttpError(
+      404,
+      getLocalizedMessage(req, 'error.sessionNotFound'),
+    );
 
   if (session.refreshTokenValidUntil < Date.now()) {
-    throw createHttpError(401, getLocalizedMessage(req, 'error.refreshTokenExpired'));
+    throw createHttpError(
+      401,
+      getLocalizedMessage(req, 'error.refreshTokenExpired'),
+    );
   }
 
   await SessionsCollection.deleteOne({ userId: session.userId });
@@ -96,7 +123,10 @@ export async function sendResetEmail(email) {
     });
   } catch (error) {
     console.log(error);
-    throw createHttpError(500, getLocalizedMessage(req, 'error.emailSendFailed'));
+    throw createHttpError(
+      500,
+      getLocalizedMessage(req, 'error.emailSendFailed'),
+    );
   }
 }
 
@@ -109,7 +139,10 @@ export async function resetPassword(payload) {
     if (error instanceof Error) {
       throw createHttpError(401, getLocalizedMessage(req, error.message));
     }
-    throw createHttpError(401, getLocalizedMessage(req, 'error.tokenExpiredOrInvalid'));
+    throw createHttpError(
+      401,
+      getLocalizedMessage(req, 'error.tokenExpiredOrInvalid'),
+    );
   }
 
   const user = await UsersCollection.findOne({
@@ -172,7 +205,8 @@ export async function loginOrSignupWithGoogle(code) {
   const loginTicket = validateCode(code);
   const tokenPayload = (await loginTicket).getPayload();
 
-  if (!tokenPayload) throw createHttpError(401, getLocalizedMessage(req, 'error.unauthorized'));
+  if (!tokenPayload)
+    throw createHttpError(401, getLocalizedMessage(req, 'error.unauthorized'));
 
   let user = await UsersCollection.findOne({ email: tokenPayload.email });
 
