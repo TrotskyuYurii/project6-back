@@ -17,12 +17,17 @@ import i18next from '../i18n.js';
 import { getLocalizedMessage } from '../utils/i18nHelper.js';
 
 export async function registerUserContoller(req, res) {
-  const user = await registerUser(req.body);
+  const { createdUser, session } = await registerUser(req.body);
+
+  setupCookies(res, session);
 
   res.status(201).json({
     status: 201,
     message: getLocalizedMessage(req, 'registration.success'),
-    data: user,
+    data: {
+      accessToken: session.accessToken,
+      createdUser,
+    },
   });
 }
 

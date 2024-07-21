@@ -149,7 +149,20 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/user"
+                      "required": [
+                        "accessToken",
+                        "createdUser"
+                      ],
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "your access token"
+                        },
+                        "createdUser": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/user"
+                        }
+                      }
                     }
                   }
                 }
@@ -985,7 +998,7 @@
             "description": "Amount of water consumed by the user per day",
             "type": "number",
             "example": 2,
-            "default": 0
+            "default": 1.5
           },
           "gender": {
             "description": "User's gender",

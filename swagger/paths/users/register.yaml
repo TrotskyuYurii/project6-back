@@ -45,7 +45,17 @@ responses:
               example: Successfully registered a user!
             data:
               type: object
-              $ref: '../../components/schemas/user.yaml'
+              required:
+                - accessToken
+                - createdUser
+              properties:
+                accessToken:
+                  type: string
+                  example: your access token
+                createdUser:
+                  type: object
+                  $ref: '../../components/schemas/user.yaml'
+
   '409':
     description: Conflict error
     content:
