@@ -63,3 +63,26 @@ DayParamSchema:
       type: string
       format: date
       description: Date for which to retrieve water consumption data in DD-MM-YYYY format
+
+MonthAggregate:
+  type: object
+  properties:
+    date:
+      type: string
+      format: date
+      example: "01-07-2024"
+    percentOfNorma:
+      type: number
+      example: 30
+    waters:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+          time:
+            type: string
+            format: time
+          amount:
+            type: number
