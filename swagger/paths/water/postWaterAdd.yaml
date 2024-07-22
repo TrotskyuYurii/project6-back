@@ -9,14 +9,14 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: '../../components/schemas/water.yaml#/components/schemas/AddWaterSchema'
+        $ref: '../../components/schemas/water.yaml#/AddWaterSchema'
 responses:
   '201':
     description: Water entry added successfully
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/water.yaml#/components/schemas/AddWaterSchema'
+          $ref: '../../components/schemas/water.yaml#/AddWaterSchema'
   '400':
     $ref: '../../components/responses/400.yaml'
   '401':

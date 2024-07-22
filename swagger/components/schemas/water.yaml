@@ -1,56 +1,65 @@
-security:
-  - BearerAuth: []
-  
-components:
-  schemas:
-    AddWaterSchema:
-      type: object
-      required:
-        - date
-        - amount
-        - time
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date of water consumption in DD-MM-YYYY format
-        amount:
-          type: number
-          minimum: 50
-          maximum: 1500
-          description: Amount of water consumed in milliliters
-        time:
-          type: string
-          format: time
-          description: Time of water consumption in HH:mm format
+Water:
+  type: object
+  properties:
+    id:
+      type: string
+    date:
+      type: string
+      format: date
+    amount:
+      type: number
+    time:
+      type: string
+      format: time
 
-    EditWaterSchema:
-      type: object
-      required:
-        - date
-        - amount
-        - time
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date of water consumption in DD-MM-YYYY format
-        amount:
-          type: number
-          minimum: 50
-          maximum: 1500
-          description: Amount of water consumed in milliliters
-        time:
-          type: string
-          format: time
-          description: Time of water consumption in HH:mm format
+AddWaterSchema:
+  type: object
+  required:
+    - date
+    - amount
+    - time
+  properties:
+    date:
+      type: string
+      format: date
+      description: Date of water consumption in DD-MM-YYYY format
+    amount:
+      type: number
+      minimum: 50
+      maximum: 1500
+      description: Amount of water consumed in milliliters
+    time:
+      type: string
+      format: time
+      description: Time of water consumption in HH:mm format
 
-    DayParamSchema:
-      type: object
-      required:
-        - date
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date for which to retrieve water consumption data in DD-MM-YYYY format
+EditWaterSchema:
+  type: object
+  required:
+    - date
+    - amount
+    - time
+  properties:
+    date:
+      type: string
+      format: date
+      description: Date of water consumption in DD-MM-YYYY format
+    amount:
+      type: number
+      minimum: 50
+      maximum: 1500
+      description: Amount of water consumed in milliliters
+    time:
+      type: string
+      format: time
+      description: Time of water consumption in HH:mm format
+
+DayParamSchema:
+  type: object
+  required:
+    - date
+  properties:
+    date:
+      type: string
+      format: date
+      description: Date for which to retrieve water consumption data in DD-MM-YYYY format
