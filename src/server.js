@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import swaggerDocs from './middlewares/swaggerDocs.js';
+import i18next from './i18n.js'; // Імпортуйт i18next
+import i18nextMiddleware from 'i18next-http-middleware'; // Імпортуйт i18next middleware
 
 import { env } from './utils/env.js';
 import { ENV_VARS } from './const/const.js';
@@ -15,6 +17,9 @@ export const setupServer = () => {
 
   const PORT = Number(env(ENV_VARS.PORT, 3000));
 
+  // додала i18next middleware
+  app.use(i18nextMiddleware.handle(i18next));
+
   app.use(
     express.json({
       type: ['application/json', 'application/vnd.api+json'],
@@ -23,12 +28,7 @@ export const setupServer = () => {
 
   app.use(cookieParser());
 
-  app.use(
-    cors({
-      origin: true,
-      credentials: true,
-    }),
-  );
+  app.use(cors());
 
   app.use(express.json());
 
