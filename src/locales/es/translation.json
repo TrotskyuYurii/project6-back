@@ -1,0 +1,54 @@
+{
+  "registration": {
+    "success": "¡Usuario registrado con éxito!"
+  },
+  "login": {
+    "success": "¡Usuario iniciado sesión con éxito!"
+  },
+  "users": {
+    "getAllSuccess": "¡Todos los usuarios registrados recuperados con éxito!"
+  },
+  "user": {
+    "getCurrentDataSuccess": "¡Datos del usuario actual recuperados con éxito!",
+    "updateSuccess": "¡Datos del usuario actualizados con éxito!"
+  },
+  "googleOAuth": {
+    "urlSuccess": "¡URL de Google OAuth recuperada con éxito!",
+    "loginSuccess": "¡Inicio de sesión con Google OAuth exitoso!"
+  },
+  "session": {
+    "refreshSuccess": "¡Sesión actualizada con éxito!"
+  },
+  "resetEmail": {
+    "sentSuccess": "¡Correo electrónico de restablecimiento de contraseña enviado con éxito!"
+  },
+  "passwordChange": {
+    "success": "¡Contraseña cambiada con éxito!"
+  },
+  "error": {
+    "addWater": "¡Error al añadir el registro de agua!",
+    "editWater": "¡Error al editar el registro de agua!",
+    "deleteWater": "¡Error al eliminar el registro de agua!",
+    "waterNotFound": "¡Registro de agua no encontrado!",
+    "noWaterRecords": "¡No se encontraron registros de agua para este usuario!",
+    "serverError": "¡Ocurrió un error inesperado en el servidor!",
+    "authorizationHeaderMissing": "Por favor, proporcione el encabezado de autorización",
+    "authHeaderInvalid": "El encabezado de autorización debe ser de tipo Bearer",
+    "sessionNotFound": "Sesión no encontrada",
+    "accessTokenExpired": "El token de acceso ha expirado",
+    "userNotFound": "No se encontró al usuario asociado con esta sesión",
+    "routeNotFound": "Ruta no encontrada",
+    "cantLoadSwaggerDocs": "No se pueden cargar los documentos de Swagger",
+    "emailInUse": "¡El correo electrónico ya está en uso!",
+    "invalidCredentials": "¡Correo electrónico o contraseña incorrectos!",
+    "refreshTokenExpired": "¡El token de actualización ha expirado!",
+    "emailSendFailed": "Error al enviar el correo electrónico, por favor intente de nuevo más tarde.",
+    "tokenExpiredOrInvalid": "¡El token ha expirado o es inválido!",
+    "usersNotFound": "Usuarios no encontrados",
+    "unauthorized": "No autorizado"
+  },
+  "key": "Hola {{userName}}",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "sign_in": "Iniciar sesión"
+}

@@ -1,0 +1,54 @@
+{
+  "registration": {
+    "success": "Utilisateur enregistré avec succès !"
+  },
+  "login": {
+    "success": "Utilisateur connecté avec succès !"
+  },
+  "users": {
+    "getAllSuccess": "Tous les utilisateurs enregistrés récupérés avec succès !"
+  },
+  "user": {
+    "getCurrentDataSuccess": "Données de l'utilisateur actuel récupérées avec succès !",
+    "updateSuccess": "Données de l'utilisateur mises à jour avec succès !"
+  },
+  "googleOAuth": {
+    "urlSuccess": "URL de Google OAuth récupérée avec succès !",
+    "loginSuccess": "Connexion réussie avec Google OAuth !"
+  },
+  "session": {
+    "refreshSuccess": "Session mise à jour avec succès !"
+  },
+  "resetEmail": {
+    "sentSuccess": "E-mail de réinitialisation du mot de passe envoyé avec succès !"
+  },
+  "passwordChange": {
+    "success": "Mot de passe changé avec succès !"
+  },
+  "error": {
+    "addWater": "Échec de l'ajout du registre d'eau !",
+    "editWater": "Échec de l'édition du registre d'eau !",
+    "deleteWater": "Échec de la suppression du registre d'eau !",
+    "waterNotFound": "Registre d'eau non trouvé !",
+    "noWaterRecords": "Aucun registre d'eau trouvé pour cet utilisateur !",
+    "serverError": "Une erreur serveur inattendue est survenue !",
+    "authorizationHeaderMissing": "Veuillez fournir l'en-tête Authorization",
+    "authHeaderInvalid": "L'en-tête Authorization doit être de type Bearer",
+    "sessionNotFound": "Session non trouvée",
+    "accessTokenExpired": "Le token d'accès a expiré",
+    "userNotFound": "Utilisateur associé à cette session non trouvé",
+    "routeNotFound": "Route non trouvée",
+    "cantLoadSwaggerDocs": "Impossible de charger les documents Swagger",
+    "emailInUse": "L'adresse e-mail est déjà utilisée !",
+    "invalidCredentials": "E-mail ou mot de passe incorrect !",
+    "refreshTokenExpired": "Le token de rafraîchissement a expiré !",
+    "emailSendFailed": "Échec de l'envoi de l'e-mail, veuillez réessayer plus tard.",
+    "tokenExpiredOrInvalid": "Le token est expiré ou invalide !",
+    "usersNotFound": "Utilisateurs non trouvés",
+    "unauthorized": "Non autorisé"
+  },
+  "key": "Bonjour {{userName}}",
+  "email": "E-mail",
+  "password": "Mot de passe",
+  "sign_in": "Se connecter"
+}

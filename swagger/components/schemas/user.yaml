@@ -30,7 +30,7 @@ properties:
     description: 'Amount of water consumed by the user per day'
     type: number
     example: 2
-    default: 0
+    default: 1.5
   gender:
     description: "User's gender"
     type: string

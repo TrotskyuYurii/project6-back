@@ -1,0 +1,29 @@
+tags:
+  - Water
+summary: Get monthly aggregated water entries
+operationId: getMonthlyAggregatedWaterEntries
+description: Retrieves aggregated water entries for a specific month
+parameters:
+  - name: date
+    in: path
+    required: true
+    schema:
+      $ref: '../../components/schemas/water.yaml#/DayParamSchema'
+responses:
+  '200':
+    description: Monthly aggregated water entries retrieved successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            userId:
+              type: string
+            data:
+              type: array
+              items:
+                $ref: '../../components/schemas/water.yaml#/MonthAggregate'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'

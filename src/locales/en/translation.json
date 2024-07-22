@@ -1,0 +1,54 @@
+{
+  "registration": {
+    "success": "Successfully registered a user!"
+  },
+  "login": {
+    "success": "Successfully logged in a user!"
+  },
+  "users": {
+    "getAllSuccess": "Successfully retrieved all registered users!"
+  },
+  "user": {
+    "getCurrentDataSuccess": "Successfully retrieved current user data!",
+    "updateSuccess": "Successfully updated user data!"
+  },
+  "googleOAuth": {
+    "urlSuccess": "Successfully retrieved Google OAuth URL!",
+    "loginSuccess": "Successfully logged in with Google OAuth!"
+  },
+  "session": {
+    "refreshSuccess": "Successfully refreshed session!"
+  },
+  "resetEmail": {
+    "sentSuccess": "Reset password email has been successfully sent!"
+  },
+  "passwordChange": {
+    "success": "Password has been successfully changed!"
+  },
+  "error": {
+    "addWater": "Failed to add water record!",
+    "editWater": "Failed to edit water record!",
+    "deleteWater": "Failed to delete water record!",
+    "waterNotFound": "Water record not found!",
+    "noWaterRecords": "Water records not found for this user!",
+    "serverError": "An unexpected server error occurred!",
+    "authorizationHeaderMissing": "Please provide Authorization header",
+    "authHeaderInvalid": "Auth header should be of type Bearer",
+    "sessionNotFound": "Session not found",
+    "accessTokenExpired": "Access token expired",
+    "userNotFound": "User associated with this session was not found",
+    "routeNotFound": "Route not found",
+    "cantLoadSwaggerDocs": "Can't load swagger docs",
+    "emailInUse": "Email is already in use!",
+    "invalidCredentials": "Wrong email or password!",
+    "refreshTokenExpired": "Refresh token is expired!",
+    "emailSendFailed": "Failed to send the email, please try again later.",
+    "tokenExpiredOrInvalid": "Token is expired or invalid!",
+    "usersNotFound": "Users not found",
+    "unauthorized": "Unauthorized"
+  },
+  "key": "Hello {{userName}}",
+  "email": "Email",
+  "password": "Password",
+  "sign_in": "Sign in"
+}

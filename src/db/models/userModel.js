@@ -7,7 +7,7 @@ export const userSchema = new Schema(
     password: { type: String, required: true },
     weight: { type: Number, default: 0 },
     sportTime: { type: Number, default: 0 },
-    waterNorma: { type: Number, default: 0 },
+    waterNorma: { type: Number, default: 1.5 },
     gender: {
       type: String,
       enum: ['woman', 'man'],

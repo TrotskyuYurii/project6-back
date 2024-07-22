@@ -13,14 +13,21 @@ import {
 import saveFileToCloudinary from '../utils/saveFileToCloudinary.js';
 import setupCookies from '../utils/setupCookies.js';
 import { generateAuthUrl } from '../utils/googleOAuth2.js';
+import i18next from '../i18n.js';
+import { getLocalizedMessage } from '../utils/i18nHelper.js';
 
 export async function registerUserContoller(req, res) {
-  const user = await registerUser(req.body);
+  const { createdUser, session } = await registerUser(req.body);
+
+  setupCookies(res, session);
 
   res.status(201).json({
     status: 201,
-    message: 'Successfully registered a user!',
-    data: user,
+    message: getLocalizedMessage(req, 'registration.success'),
+    data: {
+      accessToken: session.accessToken,
+      createdUser,
+    },
   });
 }
 
@@ -31,7 +38,7 @@ export async function loginUserController(req, res) {
 
   res.status(200).json({
     status: 200,
-    message: 'Successfully logged in a user!',
+    message: getLocalizedMessage(req, 'login.success'),
     data: {
       accessToken: session.accessToken,
     },
@@ -43,7 +50,7 @@ export async function getAllRegisteredUsersController(req, res) {
 
   res.status(200).json({
     status: 200,
-    message: 'Successfully get all registered users!',
+    message: getLocalizedMessage(req, 'users.getAllSuccess'),
     data: {
       totalRegisteredUsers: usersCount,
       users,
@@ -56,7 +63,7 @@ export async function getCurrentUserDataController(req, res) {
 
   res.status(200).json({
     status: 200,
-    message: 'Successfully get current user data!',
+    message: getLocalizedMessage(req, 'user.getCurrentDataSuccess'),
     data: userData,
   });
 }
@@ -74,7 +81,7 @@ export async function updateUserContoller(req, res) {
 
   res.status(200).json({
     status: 200,
-    message: 'Successfully update user data!',
+    message: getLocalizedMessage(req, 'user.updateSuccess'),
     data: updatedUser,
   });
 }
@@ -82,7 +89,7 @@ export async function updateUserContoller(req, res) {
 export function getGoogleOAuthUrlController(req, res) {
   res.status(200).json({
     status: 200,
-    message: 'Successfully get Google OAuth url!',
+    message: getLocalizedMessage(req, 'googleOAuth.urlSuccess'),
     data: {
       url: generateAuthUrl(),
     },
@@ -95,7 +102,7 @@ export async function loginOrSignupWithGoogleController(req, res) {
 
   res.json({
     status: 200,
-    message: 'Successfully logged in with Google OAuth!',
+    message: getLocalizedMessage(req, 'googleOAuth.loginSuccess'),
     data: {
       accessToken: session.accessToken,
     },
@@ -109,7 +116,7 @@ export async function refreshUsersSessionController(req, res) {
 
   res.status(200).json({
     status: 200,
-    message: 'Successfully refreshed a session!',
+    message: getLocalizedMessage(req, 'session.refreshSuccess'),
     data: {
       accessToken: session.accessToken,
     },
@@ -132,7 +139,7 @@ export async function sendResetEmailController(req, res) {
 
   res.status(200).json({
     status: 200,
-    message: 'Reset password email has been successfully sent!',
+    message: getLocalizedMessage(req, 'resetEmail.sentSuccess'),
     data: {},
   });
 }
@@ -142,7 +149,7 @@ export async function resetPasswordController(req, res) {
 
   res.status(200).json({
     status: 200,
-    message: 'Password has been successfully changed!',
+    message: getLocalizedMessage(req, 'passwordChange.success'),
     data: {},
   });
 }

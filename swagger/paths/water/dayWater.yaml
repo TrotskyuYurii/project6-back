@@ -19,7 +19,7 @@ responses:
         schema:
           type: array
           items:
-            $ref: '../../components/schemas/water.yaml#/components/schemas/AddWaterSchema'
+            $ref: '../../components/schemas/water.yaml#/DayParamSchema'
   '404':
     $ref: '../../components/responses/404.yaml'
   '401':

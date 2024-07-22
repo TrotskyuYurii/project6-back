@@ -57,6 +57,9 @@ paths:
   /water/month/{date}:
     get:
       $ref: '../swagger/paths/water/monthWater.yaml'
+  /water/monthagrigate/{date}:
+    get: 
+      $ref: '../swagger/paths/water/monthAgrigateWater.yaml'
 components:
   securitySchemes:
     bearerAuth:
@@ -64,4 +67,10 @@ components:
       scheme: bearer
   schemas:
     Water:
-      $ref: '../swagger/components/schemas/water.yaml'
+      $ref: '../swagger/components/schemas/water.yaml#/Water'
+    AddWaterSchema:
+      $ref: '../swagger/components/schemas/water.yaml#/AddWaterSchema'
+    EditWaterSchema:
+      $ref: '../swagger/components/schemas/water.yaml#/EditWaterSchema'
+    DayParamSchema:
+      $ref: '../swagger/components/schemas/water.yaml#/DayParamSchema'
