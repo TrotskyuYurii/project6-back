@@ -57,6 +57,9 @@ paths:
   /water/month/{date}:
     get:
       $ref: '../swagger/paths/water/monthWater.yaml'
+  /water/monthagrigate/{date}:
+    get: 
+      $ref: '../swagger/paths/water/monthAgrigateWater.yaml'
 components:
   securitySchemes:
     bearerAuth:

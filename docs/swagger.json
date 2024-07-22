@@ -946,6 +946,55 @@
           }
         }
       }
+    },
+    "/water/monthagrigate/{date}": {
+      "get": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Get monthly aggregated water entries",
+        "operationId": "getMonthlyAggregatedWaterEntries",
+        "description": "Retrieves aggregated water entries for a specific month",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DayParamSchema"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monthly aggregated water entries retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MonthAggregate"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1094,6 +1143,38 @@
             "description": "Link to user's avatar",
             "type": "string",
             "example": "https://some-avatar-url.png"
+          }
+        }
+      },
+      "MonthAggregate": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "01-07-2024"
+          },
+          "percentOfNorma": {
+            "type": "number",
+            "example": 30
+          },
+          "waters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "string",
+                  "format": "time"
+                },
+                "amount": {
+                  "type": "number"
+                }
+              }
+            }
           }
         }
       }
