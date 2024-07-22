@@ -28,12 +28,7 @@ export const setupServer = () => {
 
   app.use(cookieParser());
 
-  app.use(
-    cors({
-      origin: true,
-      credentials: true,
-    }),
-  );
+  app.use(cors());
 
   app.use(express.json());
 
