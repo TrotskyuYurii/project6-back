@@ -15,14 +15,14 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: '../../components/schemas/water.yaml#/components/schemas/EditWaterSchema'
+        $ref: '../../components/schemas/water.yaml#/EditWaterSchema'
 responses:
   '200':
     description: Water entry edited successfully
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/water.yaml#/components/schemas/EditWaterSchema'
+          $ref: '../../components/schemas/water.yaml#/EditWaterSchema'
   '400':
     $ref: '../../components/responses/400.yaml'
   '401':

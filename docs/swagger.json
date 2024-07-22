@@ -889,7 +889,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AddWaterSchema"
+                    "$ref": "#/components/schemas/DayParamSchema"
                   }
                 }
               }
@@ -957,62 +957,21 @@
     },
     "schemas": {
       "Water": {
-        "$ref": "#/components/schemas/water"
-      },
-      "user": {
         "type": "object",
         "properties": {
-          "_id": {
-            "description": "User's id",
-            "type": "string",
-            "example": "667814c7c6397783a1a5ea1d"
-          },
-          "name": {
-            "description": "User's name",
-            "type": "string",
-            "example": "John Doe",
-            "default": "Guest"
-          },
-          "email": {
-            "description": "User's email",
-            "type": "string",
-            "example": "john@example.com"
-          },
-          "password": {
-            "description": "User's password",
+          "id": {
             "type": "string"
           },
-          "weight": {
-            "description": "User's weight",
-            "type": "number",
-            "example": 70,
-            "default": 0
-          },
-          "sportTime": {
-            "description": "The time of active participation in sports",
-            "type": "number",
-            "example": 2,
-            "default": 0
-          },
-          "waterNorma": {
-            "description": "Amount of water consumed by the user per day",
-            "type": "number",
-            "example": 2,
-            "default": 1.5
-          },
-          "gender": {
-            "description": "User's gender",
+          "date": {
             "type": "string",
-            "enum": [
-              "woman",
-              "man"
-            ],
-            "default": "woman"
+            "format": "date"
           },
-          "avatar": {
-            "description": "Link to user's avatar",
+          "amount": {
+            "type": "number"
+          },
+          "time": {
             "type": "string",
-            "example": "https://some-avatar-url.png"
+            "format": "time"
           }
         }
       },
@@ -1068,79 +1027,73 @@
           }
         }
       },
-      "water": {
-        "security": [
-          {
-            "BearerAuth": []
-          }
+      "DayParamSchema": {
+        "type": "object",
+        "required": [
+          "date"
         ],
-        "components": {
-          "schemas": {
-            "AddWaterSchema": {
-              "type": "object",
-              "required": [
-                "date",
-                "amount",
-                "time"
-              ],
-              "properties": {
-                "date": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "Date of water consumption in DD-MM-YYYY format"
-                },
-                "amount": {
-                  "type": "number",
-                  "minimum": 50,
-                  "maximum": 1500,
-                  "description": "Amount of water consumed in milliliters"
-                },
-                "time": {
-                  "type": "string",
-                  "format": "time",
-                  "description": "Time of water consumption in HH:mm format"
-                }
-              }
-            },
-            "EditWaterSchema": {
-              "type": "object",
-              "required": [
-                "date",
-                "amount",
-                "time"
-              ],
-              "properties": {
-                "date": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "Date of water consumption in DD-MM-YYYY format"
-                },
-                "amount": {
-                  "type": "number",
-                  "minimum": 50,
-                  "maximum": 1500,
-                  "description": "Amount of water consumed in milliliters"
-                },
-                "time": {
-                  "type": "string",
-                  "format": "time",
-                  "description": "Time of water consumption in HH:mm format"
-                }
-              }
-            },
-            "DayParamSchema": {
-              "type": "object",
-              "required": [
-                "date"
-              ],
-              "properties": {
-                "date": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "Date for which to retrieve water consumption data in DD-MM-YYYY format"
-                }
-              }
-            }
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date for which to retrieve water consumption data in DD-MM-YYYY format"
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "description": "User's id",
+            "type": "string",
+            "example": "667814c7c6397783a1a5ea1d"
+          },
+          "name": {
+            "description": "User's name",
+            "type": "string",
+            "example": "John Doe",
+            "default": "Guest"
+          },
+          "email": {
+            "description": "User's email",
+            "type": "string",
+            "example": "john@example.com"
+          },
+          "password": {
+            "description": "User's password",
+            "type": "string"
+          },
+          "weight": {
+            "description": "User's weight",
+            "type": "number",
+            "example": 70,
+            "default": 0
+          },
+          "sportTime": {
+            "description": "The time of active participation in sports",
+            "type": "number",
+            "example": 2,
+            "default": 0
+          },
+          "waterNorma": {
+            "description": "Amount of water consumed by the user per day",
+            "type": "number",
+            "example": 2,
+            "default": 1.5
+          },
+          "gender": {
+            "description": "User's gender",
+            "type": "string",
+            "enum": [
+              "woman",
+              "man"
+            ],
+            "default": "woman"
+          },
+          "avatar": {
+            "description": "Link to user's avatar",
+            "type": "string",
+            "example": "https://some-avatar-url.png"
           }
         }
       }
