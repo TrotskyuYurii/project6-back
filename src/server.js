@@ -3,7 +3,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import swaggerDocs from './middlewares/swaggerDocs.js';
 import i18next from './i18n.js'; // Імпортуйт i18next
-import i18nextMiddleware from 'i18next-http-middleware'; // Імпортуйт i18next middleware
+// import i18nextMiddleware from 'i18next-http-middleware'; // Імпортуйт i18next middleware
 
 import { env } from './utils/env.js';
 import { ENV_VARS } from './const/const.js';
@@ -20,7 +20,7 @@ export const setupServer = () => {
   app.use(cors());
   
   // додала i18next middleware
-  app.use(i18nextMiddleware.handle(i18next));
+  // app.use(i18nextMiddleware.handle(i18next));
 
   app.use(
     express.json({
