@@ -2,8 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import swaggerDocs from './middlewares/swaggerDocs.js';
-import i18next from './i18n.js'; // Імпортуйт i18next
+// import i18next from './i18n.js'; // Імпортуйт i18next
 // import i18nextMiddleware from 'i18next-http-middleware'; // Імпортуйт i18next middleware
+
 
 import { env } from './utils/env.js';
 import { ENV_VARS } from './const/const.js';
