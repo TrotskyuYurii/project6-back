@@ -13,10 +13,12 @@ import { errorHandlerMiddleware } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
 export const setupServer = () => {
-  const app = express();
 
+  const app = express();
   const PORT = Number(env(ENV_VARS.PORT, 3000));
 
+  app.use(cors());
+  
   // додала i18next middleware
   app.use(i18nextMiddleware.handle(i18next));
 
@@ -28,9 +30,7 @@ export const setupServer = () => {
 
   app.use(cookieParser());
 
-  app.use(cors());
-
-  app.use(express.json());
+  // app.use(express.json());
 
   app.use('/api-docs', swaggerDocs());
 
